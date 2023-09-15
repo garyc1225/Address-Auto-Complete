@@ -5,7 +5,15 @@ import tensorflow_text as tf_text
 import einops
 import random
 
-def order_random_sample(myList,K,lb=2):
+def order_random_sample(myList, K, lb=2):
+    """This function takes a list, and randomly sample K components from the list in a sorted order
+
+    Args:
+        K: (int). Number of components to pick
+
+    Returns:
+        List
+    """
     indices = random.sample(range(len(myList)-lb), K)
     indices = [x+lb for x in indices]
     for i in range(lb):
@@ -27,29 +35,21 @@ def create_label_target(loc, ignore_columns = [], target = 2000000):
     df = df.loc[:,lambda x:~x.columns.isin(ignore_columns)].copy()
     df['ZipCode'] = df['ZipCode'].astype(int)
 
-    context_df = df.sample(target, replace=True).copy()
-    target_df = context_df.copy()
-
-    # context_df['rand'] = np.random.uniform(0,1,context_df.shape[0])
-
-    # # Mask the word according to probability
-    # context_df.loc[lambda x:x['rand'].between(0,0.1, inclusive = 'left'), 'AddressNumber'] = ''
-    # context_df.loc[lambda x:x['rand'].between(0.1,0.2, inclusive = 'left'), 'StreetName'] = ''
-    # context_df.loc[lambda x:x['rand'].between(0.2,0.3, inclusive = 'left'), 'PostType'] = ''
-    # context_df.loc[lambda x:x['rand'].between(0.4,0.7, inclusive = 'left'), 'ZipCode'] = ''
-    # # context_df.loc[lambda x:x['rand'].between(0.8,0.9, inclusive = 'left'), 'CountyName'] = ''
-    # context_df.loc[lambda x:x['rand'].between(0.7,1, inclusive = 'left'), 'ZipName'] = ''
-
     # Create the final string
     final_columns = ['AddressNumber','StreetName','PostType','ZipName','CountyName','State','ZipCode']
 
-    context_df['final_str_l'] = context_df[final_columns].astype(str).apply(lambda x:','.join(x), axis = 1).apply(lambda x:x.split(',')).apply(lambda x:order_random_sample(x,3))
+    context_df = df.sample(target, replace=True)[final_columns].copy()
+    target_df = context_df.copy()
+
+    context_df['final_str_l'] = context_df.astype(str).apply(lambda x:','.join(x), axis = 1).apply(lambda x:x.split(',')).apply(lambda x:order_random_sample(x,3))
     context_df['final_str'] = context_df['final_str_l'].apply(lambda x:' '.join(filter(None, x)))
-    target_df['final_str'] = target_df[final_columns].astype(str).apply(lambda x:' '.join(filter(None, x)), axis = 1)
+    target_df['final_str'] = target_df.astype(str).apply(lambda x:' '.join(filter(None, x)), axis = 1)
 
     return np.array(context_df['final_str'].tolist()),np.array(target_df['final_str'].tolist())
 
 def tf_lower_and_split_punct(text):
+    """This function takes a string, and returns the standardized string with Start of String (SOS) and End of String (EOS) token.
+    """
     # Split accented characters.
     text = tf_text.normalize_utf8(text, 'NFKD')
     text = tf.strings.lower(text)
