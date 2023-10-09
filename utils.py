@@ -87,3 +87,16 @@ class ShapeChecker():
                 raise ValueError(f"Shape mismatch for dimension: '{name}'\n"
                                 f"    found: {new_dim}\n"
                                 f"    expected: {old_dim}\n")
+
+def top_5_index(tensor, k = 5):
+    """Returns the index with the top 5 largest values of a tensor.
+
+    Args:
+        tensor: A tensor.
+
+    Returns:
+        A tensor of the index with the top 5 largest values of the tensor.
+    """
+
+    __= tf.math.top_k(tensor, k)
+    return __.indices.numpy()
