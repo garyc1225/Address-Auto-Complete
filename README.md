@@ -12,7 +12,6 @@ This toy project aims to develop an address autocomplete bot that uses the atten
 
 <p align="center">
     <img src="image/bot_function_1.PNG" width="500"> <br>
-    <caption><center><b>Figure 0</b>: Address AutoComplete Bot Function </center></caption>
 </p>
 
 *References*
