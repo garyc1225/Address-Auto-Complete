@@ -9,11 +9,13 @@ This toy project aims to develop an address autocomplete bot that uses the atten
   1. **Detect Address Error**: When given an inaccurate address, the bot will be able to detect the errors and modify the output address
   2. **Autocomplet Address**: When given an inomplete address, the bot will be able to autocomplete the remaining address.
 
-
 <p align="center">
     <img src="image/bot_function_1.PNG" width="500"> <br>
 </p>
 
-*References*
+# File
+Please visit the `Address-Auto-Complete.ipynb` notebook for the details.
+
+# *References*
   - [Effective Approaches to Attention-based Neural Machine Translation (Luong et al., 2015)](https://arxiv.org/abs/1508.04025v5)
   - [Neural Machine Translation with attention](https://www.tensorflow.org/text/tutorials/nmt_with_attention)
