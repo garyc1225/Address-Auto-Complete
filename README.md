@@ -10,7 +10,7 @@ This toy project aims to develop an address autocomplete bot that uses the atten
   2. **Autocomplet Address**: When given an inomplete address, the bot will be able to autocomplete the remaining address.
 
 <div style="text-align: center;">
-<img src="image/bot_function_1.png" width="500"> <br>
+<img src="image/bot_function_1.PNG" width="500"> <br>
 <caption><center><b>Figure 0</b>: Address AutoComplete Bot Function </center></caption>
 </div>
 
