@@ -13,6 +13,51 @@ This toy project aims to develop an address autocomplete bot that uses the atten
     <img src="image/bot_function_1.PNG" width="500"> <br>
 </p>
 
+# Demonstration
+We asked the Address Auto Complete bot to perform the function of both *Detect Address Error* and *Auto Complete Address*. 
+
+Let's use the address `49 Clinton St New York NY 10002` as an example for our demonstration. Why this address? Because I liked this LES restaurant [Yopparai](https://maps.app.goo.gl/NqEAyHaA3Ay3qE2q9) - I just went there for dinner last weekend with friends. 100% recommended!
+
+```python
+#Auto Complete Address task 1: Keep street name and City name, and check if the bot can complete the rest
+context_raw = '49 Clinton St New York'
+result = model.Addressor_fix([context_raw]) 
+print(result.numpy()[0].decode())
+
+print('\n Success!')
+
+
+    49 clinton st new york new york ny 10002 
+    
+     Success!
+```
+
+```python
+#Auto Complete Address task 2: Keep street name and Zip code, and check if the bot can complete the rest
+context_raw = '49 Clinton St 10002'
+result = model.Addressor_fix([context_raw]) 
+print(result.numpy()[0].decode())
+
+print('\n Success!')
+
+    49 clinton st new york new york ny 10002 
+    
+     Success!
+```
+
+```python
+#Detect Address Error task 1: What happens if we mistype Los Angeles instead of New York
+context_raw = '49 clinton st los angeles new york ny 10002 '
+result = model.Addressor_fix([context_raw]) 
+print(result.numpy()[0].decode())
+
+print('\n Success!')
+
+    49 clinton st new york new york ny 10002 
+    
+     Success!
+```
+
 # File
 Please visit the `Address-Auto-Complete.ipynb` notebook for the details.
 
