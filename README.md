@@ -5,7 +5,9 @@ Recently, I completed the [Deep Learning Specialization](https://coursera.org/sh
 
 My question: **Can a toy-size LLM demonstrate good performance on the task of predicting accurate and auto-complete addresses without any geospatial knowledge?** While it is known that LLMs are capable of learning complex and non-linear relationships between features and predictions on tabular & text data, it is unclear whether they can perform well on address correction (i.e., text generation) without knowing the representative meaning of individual address components such as street names, cities, and states. Can they correctly predict that an address should be in New York, without knowing what the text "New York" mean?
 
-This toy project aims to develop an address autocomplete bot that uses the attention mechanism to autocomplete addresses without requiring any geospatial knowledge. The bot will be trained on a large dataset of correctly formatted addresses, and will use the attention mechanism to learn the relationships between different address components. The address autocomplete bot will be able to do things:
+This toy project aims to develop an address autocomplete bot that uses the attention mechanism to autocomplete addresses without requiring any geospatial knowledge. The bot will be trained on a large dataset of correctly formatted addresses, and will use the attention mechanism to learn the relationships between different address components. 
+
+The final address autocomplete bot will be able to do two things:
   1. **Detect Address Error**: When given an inaccurate address, the bot will be able to detect the errors and modify the output address
   2. **Autocomplet Address**: When given an inomplete address, the bot will be able to autocomplete the remaining address.
 
@@ -24,12 +26,7 @@ context_raw = '49 Clinton St New York'
 result = model.Addressor_fix([context_raw]) 
 print(result.numpy()[0].decode())
 
-print('\n Success!')
-
-
     49 clinton st new york new york ny 10002 
-    
-     Success!
 ```
 
 ```python
@@ -38,11 +35,7 @@ context_raw = '49 Clinton St 10002'
 result = model.Addressor_fix([context_raw]) 
 print(result.numpy()[0].decode())
 
-print('\n Success!')
-
     49 clinton st new york new york ny 10002 
-    
-     Success!
 ```
 
 ```python
@@ -54,8 +47,6 @@ print(result.numpy()[0].decode())
 print('\n Success!')
 
     49 clinton st new york new york ny 10002 
-    
-     Success!
 ```
 
 # File
