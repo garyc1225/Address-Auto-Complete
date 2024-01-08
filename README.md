@@ -7,6 +7,7 @@ My question: **Can a toy-size LLM demonstrate good performance on the task of pr
 
 This toy project aims to develop an address autocomplete bot that uses the attention mechanism to autocomplete addresses without requiring any geospatial knowledge. The bot will be trained on a large dataset of correctly formatted addresses, and will use the attention mechanism to learn the relationships between different address components. 
 
+# Objective
 The final address autocomplete bot will be able to do two things:
   1. **Detect Address Error**: When given an inaccurate address, the bot will be able to detect the errors and modify the output address
   2. **Autocomplet Address**: When given an inomplete address, the bot will be able to autocomplete the remaining address.
@@ -43,8 +44,6 @@ print(result.numpy()[0].decode())
 context_raw = '49 clinton st los angeles new york ny 10002 '
 result = model.Addressor_fix([context_raw]) 
 print(result.numpy()[0].decode())
-
-print('\n Success!')
 
     49 clinton st new york new york ny 10002 
 ```
